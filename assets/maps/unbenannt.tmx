@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="32" height="18" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="1">
+ <properties>
+  <property name="mapmusic" value="audio/map1_bgd.mp3"/>
+ </properties>
+ <tileset firstgid="1" source="ts.tsx"/>
+ <layer id="1" name="Kachelebene 1" width="32" height="18">
+  <data encoding="base64" compression="zlib">
+   eJxjYmBgYAZiFoaBAWpArA7EGgNkvxcQewOxzwDZPwpGwSgYBaNgFIwC+gMAP5EBYA==
+  </data>
+ </layer>
+</map>
