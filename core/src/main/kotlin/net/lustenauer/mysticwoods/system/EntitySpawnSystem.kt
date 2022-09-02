@@ -2,24 +2,29 @@ package net.lustenauer.mysticwoods.system
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.math.Vector2
+import com.badlogic.gdx.physics.box2d.BodyDef
+import com.badlogic.gdx.physics.box2d.World
 import com.badlogic.gdx.scenes.scene2d.Event
 import com.badlogic.gdx.scenes.scene2d.EventListener
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.utils.Scaling
 import com.github.quillraven.fleks.*
 import ktx.app.gdxError
+import ktx.box2d.box
 import ktx.math.vec2
 import ktx.tiled.layer
 import ktx.tiled.x
 import ktx.tiled.y
 import net.lustenauer.mysticwoods.MysticWoods.Companion.UNIT_SCALE
 import net.lustenauer.mysticwoods.component.*
+import net.lustenauer.mysticwoods.component.PhysicComponent.Companion.physicCmpFromImage
 import net.lustenauer.mysticwoods.const.Keys
 import net.lustenauer.mysticwoods.event.MapChangeEvent
 
 @AllOf([SpawnComponent::class])
 class EntitySpawnSystem(
     @Qualifier(Keys.TEXTURE_ATLAS) private val textureAtlas: TextureAtlas,
+    private val phWorld: World,
     private val spawnCmps: ComponentMapper<SpawnComponent>,
 ) : EventListener, IteratingSystem() {
     private val cachedCfgs = mutableMapOf<String, SpawnCfg>()
@@ -31,7 +36,7 @@ class EntitySpawnSystem(
             val relativeSize = size(cfg.model)
 
             world.entity {
-                add<ImageComponent> {
+                val imageCmp = add<ImageComponent> {
                     image = Image().apply {
                         setScaling(Scaling.fill)
                         setPosition(location.x, location.y)
@@ -40,6 +45,18 @@ class EntitySpawnSystem(
                 }
                 add<AnimationComponent> {
                     nextAnimation(cfg.model, AnimationType.IDLE)
+                }
+
+                physicCmpFromImage(
+                    phWorld,
+                    imageCmp.image,
+                    BodyDef.BodyType.DynamicBody
+                ) { phCmp, width, height ->
+                    box(width, height) {
+                        isSensor = false
+                    }
+
+
                 }
             }
         }
