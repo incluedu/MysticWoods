@@ -12,6 +12,7 @@ import com.github.quillraven.fleks.collection.compareEntity
 import ktx.assets.disposeSafely
 import ktx.graphics.use
 import ktx.tiled.forEachLayer
+import net.lustenauer.mysticwoods.MysticWoods.Companion.UNIT_SCALE
 import net.lustenauer.mysticwoods.component.ImageComponent
 import net.lustenauer.mysticwoods.const.Keys
 import net.lustenauer.mysticwoods.event.MapChangeEvent
@@ -26,7 +27,7 @@ class RenderSystem(
 
     private val bgdLayers = mutableListOf<TiledMapTileLayer>()
     private val fgdLayers = mutableListOf<TiledMapTileLayer>()
-    private val mapRenderer = OrthogonalTiledMapRenderer(null, DEFAULT_UNIT_SCALE, gameStage.batch)
+    private val mapRenderer = OrthogonalTiledMapRenderer(null, UNIT_SCALE, gameStage.batch)
     private val orthoCam = gameStage.camera as OrthographicCamera
 
     override fun onTick() {
@@ -83,7 +84,4 @@ class RenderSystem(
         mapRenderer.disposeSafely()
     }
 
-    companion object {
-        private const val DEFAULT_UNIT_SCALE = 1 / 16f
-    }
 }

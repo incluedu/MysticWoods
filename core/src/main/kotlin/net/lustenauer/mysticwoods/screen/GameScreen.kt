@@ -3,22 +3,18 @@ package net.lustenauer.mysticwoods.screen
 import com.badlogic.gdx.maps.tiled.TiledMap
 import com.badlogic.gdx.maps.tiled.TmxMapLoader
 import com.badlogic.gdx.scenes.scene2d.EventListener
-import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.github.quillraven.fleks.World
 import com.github.quillraven.fleks.world
 import ktx.assets.disposeSafely
 import ktx.log.logger
 import net.lustenauer.mysticwoods.MysticWoods
 import net.lustenauer.mysticwoods.assets.TextureAtlasAsset
-import net.lustenauer.mysticwoods.component.AnimationComponent
-import net.lustenauer.mysticwoods.component.AnimationModel
-import net.lustenauer.mysticwoods.component.AnimationType
-import net.lustenauer.mysticwoods.component.ImageComponent
 import net.lustenauer.mysticwoods.component.ImageComponent.Companion.ImageComponentLister
 import net.lustenauer.mysticwoods.const.Keys
 import net.lustenauer.mysticwoods.event.MapChangeEvent
 import net.lustenauer.mysticwoods.event.fire
 import net.lustenauer.mysticwoods.system.AnimationSystem
+import net.lustenauer.mysticwoods.system.EntitySpawnSystem
 import net.lustenauer.mysticwoods.system.RenderSystem
 
 class GameScreen(game: MysticWoods) : MysticWoodsScreen(game) {
@@ -36,6 +32,7 @@ class GameScreen(game: MysticWoods) : MysticWoodsScreen(game) {
         }
 
         systems {
+            add<EntitySpawnSystem>()
             add<AnimationSystem>()
             add<RenderSystem>()
         }
@@ -56,31 +53,6 @@ class GameScreen(game: MysticWoods) : MysticWoodsScreen(game) {
         currentMap = TmxMapLoader().load("maps/demo.tmx").apply {
             gameStage.fire(MapChangeEvent(this))
         }
-
-        world.entity {
-            add<ImageComponent>() {
-                image = Image().apply {
-                    setSize(4f, 4f)
-                }
-            }
-            add<AnimationComponent> {
-                nextAnimation(AnimationModel.PLAYER, AnimationType.IDLE)
-            }
-
-        }
-
-        world.entity {
-            add<ImageComponent>() {
-                image = Image().apply {
-                    setSize(4f, 4f)
-                    setPosition(12f, 0f)
-                }
-            }
-            add<AnimationComponent> {
-                nextAnimation(AnimationModel.SLIME, AnimationType.RUN)
-            }
-        }
-
     }
 
     override fun resize(width: Int, height: Int) {
