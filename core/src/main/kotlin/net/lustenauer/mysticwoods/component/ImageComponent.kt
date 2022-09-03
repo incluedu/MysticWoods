@@ -5,7 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.github.quillraven.fleks.ComponentListener
 import com.github.quillraven.fleks.Entity
 import com.github.quillraven.fleks.Qualifier
-import net.lustenauer.mysticwoods.const.Keys
+import net.lustenauer.mysticwoods.MysticWoods.Companion.GAME_STAGE
 
 class ImageComponent : Comparable<ImageComponent> {
     lateinit var image: Image
@@ -21,7 +21,7 @@ class ImageComponent : Comparable<ImageComponent> {
 
     companion object {
         class ImageComponentLister(
-            @Qualifier(Keys.GAME_STAGE) private val stage: Stage,
+            @Qualifier(GAME_STAGE) private val stage: Stage,
         ) : ComponentListener<ImageComponent> {
             override fun onComponentAdded(entity: Entity, component: ImageComponent) {
                 stage.addActor(component.image)

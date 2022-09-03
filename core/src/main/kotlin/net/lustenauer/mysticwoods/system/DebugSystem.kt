@@ -6,11 +6,11 @@ import com.badlogic.gdx.scenes.scene2d.Stage
 import com.github.quillraven.fleks.IntervalSystem
 import com.github.quillraven.fleks.Qualifier
 import ktx.assets.disposeSafely
-import net.lustenauer.mysticwoods.const.Keys
+import net.lustenauer.mysticwoods.MysticWoods.Companion.GAME_STAGE
 
 class DebugSystem(
     private val phWorld: World,
-    @Qualifier(Keys.GAME_STAGE) private val gameStage: Stage,
+    @Qualifier(GAME_STAGE) private val gameStage: Stage,
 ) : IntervalSystem(enabled = true) {
     private lateinit var box2DDebugRenderer: Box2DDebugRenderer
 

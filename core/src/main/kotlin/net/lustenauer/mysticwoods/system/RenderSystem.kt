@@ -12,14 +12,14 @@ import com.github.quillraven.fleks.collection.compareEntity
 import ktx.assets.disposeSafely
 import ktx.graphics.use
 import ktx.tiled.forEachLayer
+import net.lustenauer.mysticwoods.MysticWoods.Companion.GAME_STAGE
 import net.lustenauer.mysticwoods.MysticWoods.Companion.UNIT_SCALE
 import net.lustenauer.mysticwoods.component.ImageComponent
-import net.lustenauer.mysticwoods.const.Keys
 import net.lustenauer.mysticwoods.event.MapChangeEvent
 
 @AllOf([ImageComponent::class])
 class RenderSystem(
-    @Qualifier(Keys.GAME_STAGE) private val gameStage: Stage,
+    @Qualifier(GAME_STAGE) private val gameStage: Stage,
     private val imageCmps: ComponentMapper<ImageComponent>
 ) : EventListener, IteratingSystem(
     comparator = compareEntity { e1, e2 -> imageCmps[e1].compareTo(imageCmps[e2]) }

@@ -10,12 +10,11 @@ import ktx.app.KtxScreen
 import ktx.assets.async.AssetStorage
 import ktx.assets.disposeSafely
 import ktx.async.KtxAsync
-import net.lustenauer.mysticwoods.const.Consts
 import net.lustenauer.mysticwoods.screen.LoadingScreen
 
 class MysticWoods : KtxGame<KtxScreen>() {
-    val gameStage: Stage by lazy { Stage(ExtendViewport(Consts.V_WIDTH, Consts.V_Height)) }
-    val uiStage: Stage by lazy { Stage(FitViewport(Consts.V_WIDTH_PIXELS, Consts.V_HEIGHT_PIXELS)) }
+    val gameStage: Stage by lazy { Stage(ExtendViewport(V_WIDTH, V_Height)) }
+    val uiStage: Stage by lazy { Stage(FitViewport(V_WIDTH_PIXELS, V_HEIGHT_PIXELS)) }
     val assets: AssetStorage by lazy {
         KtxAsync.initiate()
         AssetStorage()
@@ -33,5 +32,12 @@ class MysticWoods : KtxGame<KtxScreen>() {
 
     companion object {
         const val UNIT_SCALE = 1 / 16f
+        const val V_WIDTH = 16f
+        const val V_Height = 9f
+        const val V_WIDTH_PIXELS = 240f
+        const val V_HEIGHT_PIXELS = 135f
+
+        const val GAME_STAGE = "GameStage"
+        const val TEXTURE_ATLAS = "TextureAtlas"
     }
 }

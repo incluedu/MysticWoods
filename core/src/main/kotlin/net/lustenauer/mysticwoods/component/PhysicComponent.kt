@@ -14,6 +14,7 @@ import ktx.math.vec2
 class PhysicComponent {
     val impulse = vec2()
     lateinit var body: Body
+    val prevPos = vec2()
 
     companion object {
         fun EntityCreateCfg.physicCmpFromImage(

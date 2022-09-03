@@ -15,15 +15,15 @@ import ktx.math.vec2
 import ktx.tiled.layer
 import ktx.tiled.x
 import ktx.tiled.y
+import net.lustenauer.mysticwoods.MysticWoods.Companion.TEXTURE_ATLAS
 import net.lustenauer.mysticwoods.MysticWoods.Companion.UNIT_SCALE
 import net.lustenauer.mysticwoods.component.*
 import net.lustenauer.mysticwoods.component.PhysicComponent.Companion.physicCmpFromImage
-import net.lustenauer.mysticwoods.const.Keys
 import net.lustenauer.mysticwoods.event.MapChangeEvent
 
 @AllOf([SpawnComponent::class])
 class EntitySpawnSystem(
-    @Qualifier(Keys.TEXTURE_ATLAS) private val textureAtlas: TextureAtlas,
+    @Qualifier(TEXTURE_ATLAS) private val textureAtlas: TextureAtlas,
     private val phWorld: World,
     private val spawnCmps: ComponentMapper<SpawnComponent>,
 ) : EventListener, IteratingSystem() {

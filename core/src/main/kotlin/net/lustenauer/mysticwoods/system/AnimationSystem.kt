@@ -7,14 +7,14 @@ import com.github.quillraven.fleks.*
 import ktx.app.gdxError
 import ktx.collections.map
 import ktx.log.logger
+import net.lustenauer.mysticwoods.MysticWoods.Companion.TEXTURE_ATLAS
 import net.lustenauer.mysticwoods.component.AnimationComponent
 import net.lustenauer.mysticwoods.component.AnimationComponent.Companion.NO_ANIMATION
 import net.lustenauer.mysticwoods.component.ImageComponent
-import net.lustenauer.mysticwoods.const.Keys
 
 @AllOf([AnimationComponent::class, ImageComponent::class])
 class AnimationSystem(
-    @Qualifier(Keys.TEXTURE_ATLAS) private val textureAtlas: TextureAtlas,
+    @Qualifier(TEXTURE_ATLAS) private val textureAtlas: TextureAtlas,
     private val animationCmps: ComponentMapper<AnimationComponent>,
     private val imageCmps: ComponentMapper<ImageComponent>
 ) : IteratingSystem() {

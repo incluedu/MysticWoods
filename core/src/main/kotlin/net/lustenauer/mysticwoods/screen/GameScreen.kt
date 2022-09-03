@@ -9,10 +9,11 @@ import ktx.box2d.createWorld
 import ktx.log.logger
 import ktx.math.vec2
 import net.lustenauer.mysticwoods.MysticWoods
+import net.lustenauer.mysticwoods.MysticWoods.Companion.GAME_STAGE
+import net.lustenauer.mysticwoods.MysticWoods.Companion.TEXTURE_ATLAS
 import net.lustenauer.mysticwoods.assets.TextureAtlasAsset
 import net.lustenauer.mysticwoods.component.ImageComponent.Companion.ImageComponentLister
 import net.lustenauer.mysticwoods.component.PhysicComponent.Companion.PhysicComponentListener
-import net.lustenauer.mysticwoods.const.Keys
 import net.lustenauer.mysticwoods.event.MapChangeEvent
 import net.lustenauer.mysticwoods.event.fire
 import net.lustenauer.mysticwoods.input.PlayerKeyboardInputProcessor
@@ -29,8 +30,8 @@ class GameScreen(game: MysticWoods) : MysticWoodsScreen(game) {
     private val entityWorld = world {
         injectables {
             add(phWorld)
-            add(Keys.GAME_STAGE, gameStage)
-            add(Keys.TEXTURE_ATLAS, textureAtlas)
+            add(GAME_STAGE, gameStage)
+            add(TEXTURE_ATLAS, textureAtlas)
         }
 
         components {
@@ -43,6 +44,7 @@ class GameScreen(game: MysticWoods) : MysticWoodsScreen(game) {
             add<MoveSystem>()
             add<PhysicSystem>()
             add<AnimationSystem>()
+            add<CameraSystem>()
             add<RenderSystem>()
             add<DebugSystem>()
         }
