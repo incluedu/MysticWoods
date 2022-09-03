@@ -55,8 +55,16 @@ class EntitySpawnSystem(
                     box(width, height) {
                         isSensor = false
                     }
+                }
 
+                if (cfg.speedScaling > 0f){
+                    add<MoveComponent> {
+                        speed = DEFAULT_SPEED * cfg.speedScaling
+                    }
+                }
 
+                if (name == PLAYER_NAME) {
+                    add<PlayerComponent>()
                 }
             }
         }
@@ -65,9 +73,9 @@ class EntitySpawnSystem(
 
     private fun spawnCfg(entityName: String): SpawnCfg = cachedCfgs.getOrPut(entityName) {
         when (entityName) {
-            "PLAYER" -> SpawnCfg(AnimationModel.PLAYER)
-            "SLIME" -> SpawnCfg(AnimationModel.SLIME)
-            "CHEST" -> SpawnCfg(AnimationModel.CHEST)
+            PLAYER_NAME -> SpawnCfg(AnimationModel.PLAYER)
+            SLIME_NAME -> SpawnCfg(AnimationModel.SLIME)
+            CHEST_NAME -> SpawnCfg(AnimationModel.CHEST)
             else -> gdxError("Entity $entityName has no SpawnCfg")
         }
     }
@@ -99,5 +107,11 @@ class EntitySpawnSystem(
             }
         }
         return false
+    }
+
+    companion object {
+        private const val PLAYER_NAME = "PLAYER"
+        private const val SLIME_NAME = "SLIME"
+        private const val CHEST_NAME = "CHEST"
     }
 }

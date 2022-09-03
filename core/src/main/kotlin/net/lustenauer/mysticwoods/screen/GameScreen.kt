@@ -15,6 +15,7 @@ import net.lustenauer.mysticwoods.component.PhysicComponent.Companion.PhysicComp
 import net.lustenauer.mysticwoods.const.Keys
 import net.lustenauer.mysticwoods.event.MapChangeEvent
 import net.lustenauer.mysticwoods.event.fire
+import net.lustenauer.mysticwoods.input.PlayerKeyboardInputProcessor
 import net.lustenauer.mysticwoods.system.*
 
 class GameScreen(game: MysticWoods) : MysticWoodsScreen(game) {
@@ -39,6 +40,7 @@ class GameScreen(game: MysticWoods) : MysticWoodsScreen(game) {
 
         systems {
             add<EntitySpawnSystem>()
+            add<MoveSystem>()
             add<PhysicSystem>()
             add<AnimationSystem>()
             add<RenderSystem>()
@@ -61,6 +63,8 @@ class GameScreen(game: MysticWoods) : MysticWoodsScreen(game) {
         currentMap = TmxMapLoader().load("maps/demo.tmx").apply {
             gameStage.fire(MapChangeEvent(this))
         }
+
+        PlayerKeyboardInputProcessor(entityWorld, entityWorld.mapper())
     }
 
     override fun resize(width: Int, height: Int) {
